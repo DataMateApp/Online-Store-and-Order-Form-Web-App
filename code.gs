@@ -57,7 +57,7 @@ function createInvoiceTemplate() {
   sheet.getRange('D30').setFormula('=SUM(D19:D28)');
   
   sheet.getRange('B31').setValue('Tax:').setFontWeight('bold');
-  sheet.getRange('C31').setValue('10');
+  sheet.getRange('C31').setValue('.10');
   sheet.getRange('D31').setFormula('=D30*C31');
   
   sheet.getRange('C32').setValue('Total:').setFontWeight('bold');
