@@ -592,6 +592,17 @@ viewPrintSheet.setHiddenGridlines(true);
   copyInput1();
   view();
 
+  // Ensure pending operations are processed before sending email
+SpreadsheetApp.flush();
+
+// Email Notification
+const recipient = "projectprodigyapp@gmail.com";
+const subject = "New Online Store Created!";
+const body = `A new Online Store has been created successfully in Google Sheets.\n\n
+Another user from Opensource.`;
+
+MailApp.sendEmail(recipient, subject, body);
+
 }
 
 function copyInput1() {
