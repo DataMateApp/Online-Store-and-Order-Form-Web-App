@@ -47,7 +47,27 @@ function createInvoiceTemplate() {
   sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
   
   // Invoice Details Table (sample rows)
-  
+  sheet.getRange('C19').setFormula("=IFERROR(VLOOKUP(A19,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C20').setFormula("=IFERROR(VLOOKUP(A20,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C21').setFormula("=IFERROR(VLOOKUP(A21,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C22').setFormula("=IFERROR(VLOOKUP(A22,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C23').setFormula("=IFERROR(VLOOKUP(A23,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C24').setFormula("=IFERROR(VLOOKUP(A24,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C25').setFormula("=IFERROR(VLOOKUP(A25,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C26').setFormula("=IFERROR(VLOOKUP(A26,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C27').setFormula("=IFERROR(VLOOKUP(A27,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+  sheet.getRange('C28').setFormula("=IFERROR(VLOOKUP(A28,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
+
+  sheet.getRange('D19').setFormula("=IFERROR($B19*$C19,0)").setFontSize(10);
+  sheet.getRange('D20').setFormula("=IFERROR($B20*$C20,0)").setFontSize(10);
+  sheet.getRange('D21').setFormula("=IFERROR($B21*$C21,0)").setFontSize(10);
+  sheet.getRange('D22').setFormula("=IFERROR($B22*$C22,0)").setFontSize(10);
+  sheet.getRange('D23').setFormula("=IFERROR($B23*$C23,0)").setFontSize(10);
+  sheet.getRange('D24').setFormula("=IFERROR($B24*$C24,0)").setFontSize(10);
+  sheet.getRange('D25').setFormula("=IFERROR($B25*$C25,0)").setFontSize(10);
+  sheet.getRange('D26').setFormula("=IFERROR($B26*$C26,0)").setFontSize(10);
+  sheet.getRange('D27').setFormula("=IFERROR($B27*$C27,0)").setFontSize(10);
+  sheet.getRange('D28').setFormula("=IFERROR($B28*$C28,0)").setFontSize(10);
 
 
   
