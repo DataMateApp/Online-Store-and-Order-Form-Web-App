@@ -334,7 +334,7 @@ try {
     SpreadsheetApp.getUi().alert("Sheet1 not found.");
   }
 
-  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Deployment instructions: Deploy as a Web App Click Deploy > New Deployment. Under Select type, choose Web app. In the Description field, enter something like "Order Form Deployment". Under Execute as, select Me (so the script runs with your permissions). Under Who has access, select: Anyone (if you want anyone to access it without signing in). Click Deploy. Click Authorize Access and follow the prompts to approve permissions. Copy the Web App URL and share it with users. Please support DataMateApps and help us grow!");
+  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Inventory Template created successfully. Deploy as a Web App Click Deploy > New Deployment. Under Select type, choose Web app.Please support DataMateApps and help us grow!");
 
 } catch (e) {
   SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
