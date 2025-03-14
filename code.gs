@@ -1,17 +1,17 @@
 
-function Setup() {
+function setup() {
+  newfileit();
+  contactsit();
   createInventoryTemplate();
   createInvoiceTemplate();
   createReceiptTemplate();
   createPackingSlipTemplate();
-  newfile();
-  contacts();
   
 }
 
 function createInvoiceTemplate() {
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = spreadsheet.getSheetByName('Sheet1') || spreadsheet.insertSheet('Sheet1');
+  var ss = SpreadsheetApp.getActiveSpreadsheet(); // Define ss
+  var sheet = ss.getSheetByName('Sheet1') || ss.insertSheet('Sheet1');
   sheet.clear();
 
   // Header Section
@@ -22,62 +22,54 @@ function createInvoiceTemplate() {
   sheet.getRange('A6:E6').merge().setValue('Business Phone').setFontSize(10);
   sheet.getRange('A8:E8').merge().setValue('INVOICE').setFontSize(14).setFontWeight('bold');
   sheet.getRange('A9').setValue('Number').setFontSize(10).setFontWeight('bold');
-  
+  sheet.getRange('A10').setValue('Bill to:').setFontSize(10).setFontWeight('bold');
+
   // Client Information
-  sheet.getRange('A10:B10').merge().setValue('Bill To:').setFontWeight('bold');
-  sheet.getRange('A11:B11').merge().setValue('First Name Middle Name Last Name');
+
   sheet.getRange('A12:B12').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 44, FALSE)");
   sheet.getRange('A13:B13').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 26, FALSE)");
   sheet.getRange('A14:B14').merge().setFormula(
-  '=VLOOKUP(A11, contacts!A:CJ, 30, FALSE) & ", " & ' +
-  'VLOOKUP(A11, contacts!A:CJ, 31, FALSE) & "   " & ' +
-  'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
-);
+    '=VLOOKUP(A11, contacts!A:CJ, 30, FALSE) & ", " & ' +
+    'VLOOKUP(A11, contacts!A:CJ, 31, FALSE) & "   " & ' +
+    'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
+  );
   sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
   sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 40, FALSE)");
 
-   
   sheet.getRange('D10:E10').merge().setValue('Date:').setFontWeight('bold');
   sheet.getRange('D11:E11').merge().setFormula("=TODAY()");
-  
+
   // Invoice Details Table Header
   sheet.getRange('A18').setValue('Description').setFontWeight('bold').setBackground('#cccccc');
   sheet.getRange('B18').setValue('Quantity').setFontWeight('bold').setBackground('#cccccc');
   sheet.getRange('C18').setValue('Unit Price').setFontWeight('bold').setBackground('#cccccc');
   sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
-  
-  // Invoice Details Table (sample rows)
-  sheet.getRange('C19').setFormula("=IFERROR(VLOOKUP(A19,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C20').setFormula("=IFERROR(VLOOKUP(A20,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C21').setFormula("=IFERROR(VLOOKUP(A21,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C22').setFormula("=IFERROR(VLOOKUP(A22,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C23').setFormula("=IFERROR(VLOOKUP(A23,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C24').setFormula("=IFERROR(VLOOKUP(A24,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C25').setFormula("=IFERROR(VLOOKUP(A25,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C26').setFormula("=IFERROR(VLOOKUP(A26,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C27').setFormula("=IFERROR(VLOOKUP(A27,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
-  sheet.getRange('C28').setFormula("=IFERROR(VLOOKUP(A28,Inventory!$A$2:$CL$9341,3,FALSE), ").setFontSize(10);
 
-  sheet.getRange('D19').setFormula("=IFERROR($B19*$C19,0)").setFontSize(10);
-  sheet.getRange('D20').setFormula("=IFERROR($B20*$C20,0)").setFontSize(10);
-  sheet.getRange('D21').setFormula("=IFERROR($B21*$C21,0)").setFontSize(10);
-  sheet.getRange('D22').setFormula("=IFERROR($B22*$C22,0)").setFontSize(10);
-  sheet.getRange('D23').setFormula("=IFERROR($B23*$C23,0)").setFontSize(10);
-  sheet.getRange('D24').setFormula("=IFERROR($B24*$C24,0)").setFontSize(10);
-  sheet.getRange('D25').setFormula("=IFERROR($B25*$C25,0)").setFontSize(10);
-  sheet.getRange('D26').setFormula("=IFERROR($B26*$C26,0)").setFontSize(10);
-  sheet.getRange('D27').setFormula("=IFERROR($B27*$C27,0)").setFontSize(10);
-  sheet.getRange('D28').setFormula("=IFERROR($B28*$C28,0)").setFontSize(10);
+  var inventorySheet = ss.getSheetByName("Inventory"); 
+  if (inventorySheet) { // Ensure the sheet exists before using it
+    sheet.getRange("A19:A28").setDataValidation(
+      SpreadsheetApp.newDataValidation()
+        .setAllowInvalid(false)
+        .requireValueInRange(inventorySheet.getRange("A:A"), true) // Removed "$" for Apps Script compatibility
+        .build()
+    );
+  } else {
+    
+    Logger.log("Error: 'Inventory' sheet not found.");
+  }
 
+  // Populate formulas for items in the invoice
+  for (var row = 19; row <= 28; row++) {
+    sheet.getRange('C' + row).setFormula(`=IFERROR(VLOOKUP(A${row},Inventory!$A$2:$CL$9341,3,FALSE), 0)`).setFontSize(10);
+    sheet.getRange('D' + row).setFormula(`=IFERROR($B${row}*$C${row},0)`).setFontSize(10);
+  }
 
-  
-  
   // Summary Section
   sheet.getRange('C30').setValue('Subtotal:').setFontWeight('bold');
   sheet.getRange('D30').setFormula('=SUM(D19:D28)');
   
   sheet.getRange('B31').setValue('Tax:').setFontWeight('bold');
-  sheet.getRange('C31').setValue('.10');
+  sheet.getRange('C31').setValue('10');
   sheet.getRange('D31').setFormula('=D30*C31');
   
   sheet.getRange('C32').setValue('Total:').setFontWeight('bold');
@@ -86,12 +78,13 @@ function createInvoiceTemplate() {
   // Payment Instructions
   sheet.getRange('A34:E34').merge().setValue('Payment Instructions:').setFontWeight('bold');
   sheet.getRange('A35:E35').merge().setValue('[Your Payment Instructions]');
-  
+
   // Formatting the sheet
   sheet.getRange('A1:E32').setHorizontalAlignment('center');
   sheet.getRange('A1:E6').setHorizontalAlignment('left');
   sheet.getRange('A9:B17').setHorizontalAlignment('left');
   sheet.getRange('A34:E35').setHorizontalAlignment('left');
+  
   sheet.setColumnWidth(1, 350); // Set column A to 350
   sheet.setColumnWidths(2, 3, 100); // Set columns B, C, D to 100
   
@@ -100,14 +93,13 @@ function createInvoiceTemplate() {
   
   // Setting number formats
   sheet.getRange('C19:C28').setNumberFormat('$#,##0.00');
-  sheet.getRange('D193:D28').setNumberFormat('$#,##0.00');
+  sheet.getRange('D19:D28').setNumberFormat('$#,##0.00'); // Fixed range typo
   sheet.getRange('D30:D32').setNumberFormat('$#,##0.00');
 
   // Insert two rows at the top
   sheet.insertRowsBefore(1, 2);
-
-
 }
+
 
 function createReceiptTemplate() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -146,7 +138,7 @@ function createReceiptTemplate() {
   sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
   
   // Invoice Details Table (sample rows)
-    sheet.getRange('A19').setFormula("=View_Print!A21").setFontSize(10);
+  sheet.getRange('A19').setFormula("=View_Print!A21").setFontSize(10);
   sheet.getRange('A20').setFormula("=View_Print!A22").setFontSize(10);
   sheet.getRange('A21').setFormula("=View_Print!A23").setFontSize(10);
   sheet.getRange('A22').setFormula("=View_Print!A24").setFontSize(10);
@@ -259,123 +251,120 @@ function createInventoryTemplate() {
 
 
 function createPackingSlipTemplate() {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = spreadsheet.getSheetByName('Packing Slip') || spreadsheet.insertSheet('Packing Slip');
+    sheet.clear();
+
+    // Header Section
+    sheet.getRange('A1:E1').merge().setFormula("=View_Print!A3").setFontSize(16).setFontWeight('bold');
+    sheet.getRange('A3:E3').merge().setFormula("=View_Print!A4").setFontSize(10);
+    sheet.getRange('A4:E4').merge().setFormula("=View_Print!A5").setFontSize(10);
+    sheet.getRange('A5:E5').merge().setFormula("=View_Print!A6").setFontSize(10);
+    sheet.getRange('A6:E6').merge().setFormula("=View_Print!A7").setFontSize(10);
+
+    sheet.getRange('A8:E8').merge().setValue('PACKING SLIP').setFontSize(14).setFontWeight('bold');
+
+    // Client Information
+    sheet.getRange('A10:B10').merge().setValue('Bill To:').setFontWeight('bold');
+    sheet.getRange('A11:B11').merge().setFormula("=View_Print!A13");
+    sheet.getRange('A12:B12').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 44, FALSE)");
+    sheet.getRange('A13:B13').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 26, FALSE)");
+    sheet.getRange('A14:B14').merge().setFormula(
+      '=VLOOKUP(A11, contacts!A:CJ, 30, FALSE) & ", " & ' +
+      'VLOOKUP(A11, contacts!A:CJ, 31, FALSE) & "   " & ' +
+      'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
+    );
+    sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
+    sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 40, FALSE)");
+
+    sheet.getRange('D10:E10').merge().setValue('Date Shipped:').setFontWeight('bold');
+    sheet.getRange('D11:E11').merge().setFormula("=View_Print!O2");
+
+    // Invoice Details Table Header
+    sheet.getRange('A18').setValue('Description').setFontWeight('bold').setBackground('#cccccc');
+    sheet.getRange('B18').setValue('Quantity').setFontWeight('bold').setBackground('#cccccc');
+    sheet.getRange('C18').setValue('Unit Price').setFontWeight('bold').setBackground('#cccccc');
+    sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
+
+    // Invoice Details Table (sample rows)
+    for (var i = 19; i <= 28; i++) {
+      sheet.getRange('A' + i).setFormula(`=View_Print!A${i + 2}`).setFontSize(10);
+      sheet.getRange('B' + i).setFormula(`=View_Print!B${i + 2}`).setFontSize(10);
+      sheet.getRange('C' + i).setFormula(`=View_Print!C${i + 2}`).setFontSize(10);
+      sheet.getRange('D' + i).setFormula(`=View_Print!D${i + 2}`).setFontSize(10);
+    }
+
+    // Summary Section
+    sheet.getRange('C30').setValue('Subtotal:').setFontWeight('bold');
+    sheet.getRange('D30').setFormula('=View_Print!D32');
+
+    sheet.getRange('B31').setValue('Tax:').setFontWeight('bold');
+    sheet.getRange('C31').setFormula('=View_Print!C33');
+    sheet.getRange('D31').setFormula('=View_Print!D33');
+
+    sheet.getRange('C32').setValue('Total:').setFontWeight('bold');
+    sheet.getRange('D32').setFormula('=View_Print!D34');
+
+    // Note Section
+    sheet.getRange('A29:E29').merge().setValue('Thank you for your business!').setFontWeight('bold');
+
+    // Formatting the sheet
+    sheet.getRange('A1:E32').setHorizontalAlignment('center');
+    sheet.getRange('A1:E6').setHorizontalAlignment('left');
+    sheet.getRange('A9:B17').setHorizontalAlignment('left');
+    sheet.getRange('A34:E35').setHorizontalAlignment('left');
+    sheet.setColumnWidth(1, 350); // Set column A to 350
+    sheet.setColumnWidths(2, 3, 100); // Set columns B, C, D to 100
+
+    // Setting borders for the table
+    sheet.getRange('A18:D28').setBorder(true, true, true, true, true, true);
+
+    // Setting number formats
+    sheet.getRange('C19:C28').setNumberFormat('$#,##0.00');
+    sheet.getRange('D19:D28').setNumberFormat('$#,##0.00');
+    sheet.getRange('D30:D32').setNumberFormat('$#,##0.00');
+    
+
+try {
+  var sheetsToMove = ['Packing Slip', 'Receipt', 'Inventory']; // Reverse order
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = spreadsheet.getSheetByName('Packing Slip') || spreadsheet.insertSheet('Packing Slip');
-  sheet.clear();
 
-  // Header Section
-  sheet.getRange('A1:E1').merge().setFormula("=View_Print!A3").setFontSize(16).setFontWeight('bold');
-  sheet.getRange('A3:E3').merge().setFormula("=View_Print!A4").setFontSize(10);
-  sheet.getRange('A4:E4').merge().setFormula("=View_Print!A5").setFontSize(10);
-  sheet.getRange('A5:E5').merge().setFormula("=View_Print!A6").setFontSize(10);
-  sheet.getRange('A6:E6').merge().setFormula("=View_Print!A7").setFontSize(10);
+  // Loop through the sheets and move them to the front
+  sheetsToMove.forEach(function(sheetName) {
+    var sheet = spreadsheet.getSheetByName(sheetName);
+    if (sheet) {
+      spreadsheet.setActiveSheet(sheet);
+      spreadsheet.moveActiveSheet(0); // Move to the front (index 0)
+    }
+  });
 
-  
+  // Activate 'Sheet1' at the end
+  var sheet1 = spreadsheet.getSheetByName('Sheet1');
+  if (sheet1) {
+    sheet1.activate();
+  } else {
+    SpreadsheetApp.getUi().alert("Sheet1 not found.");
+  }
 
-  sheet.getRange('A8:E8').merge().setValue('PACKING SLIP').setFontSize(14).setFontWeight('bold');
+  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Please support DataMateApps and help us grow!");
 
-  
-  // Client Information
-  sheet.getRange('A10:B10').merge().setValue('Bill To:').setFontWeight('bold');
-  sheet.getRange('A11:B11').merge().setFormula("=View_Print!A13");
-  sheet.getRange('A12:B12').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 44, FALSE)");
-  sheet.getRange('A13:B13').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 26, FALSE)");
-  sheet.getRange('A14:B14').merge().setFormula(
-  '=VLOOKUP(A11, contacts!A:CJ, 30, FALSE) & ", " & ' +
-  'VLOOKUP(A11, contacts!A:CJ, 31, FALSE) & "   " & ' +
-  'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
-);
-  sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
-  sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 40, FALSE)");
-
-   
-  sheet.getRange('D10:E10').merge().setValue('Date Shipped:').setFontWeight('bold');
-  sheet.getRange('D11:E11').merge().setFormula("=View_Print!O2");
-  
-  // Invoice Details Table Header
-  sheet.getRange('A18').setValue('Description').setFontWeight('bold').setBackground('#cccccc');
-  sheet.getRange('B18').setValue('Quantity').setFontWeight('bold').setBackground('#cccccc');
-  sheet.getRange('C18').setValue('Unit Price').setFontWeight('bold').setBackground('#cccccc');
-  sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
-  
-  // Invoice Details Table (sample rows)
-  sheet.getRange('A19').setFormula("=View_Print!A21").setFontSize(10);
-  sheet.getRange('A20').setFormula("=View_Print!A22").setFontSize(10);
-  sheet.getRange('A21').setFormula("=View_Print!A23").setFontSize(10);
-  sheet.getRange('A22').setFormula("=View_Print!A24").setFontSize(10);
-  sheet.getRange('A23').setFormula("=View_Print!A25").setFontSize(10);
-  sheet.getRange('A24').setFormula("=View_Print!A26").setFontSize(10);
-  sheet.getRange('A25').setFormula("=View_Print!A27").setFontSize(10);
-  sheet.getRange('A26').setFormula("=View_Print!A28").setFontSize(10);
-  sheet.getRange('A27').setFormula("=View_Print!A29").setFontSize(10);
-  sheet.getRange('A28').setFormula("=View_Print!A30").setFontSize(10);
-
-  sheet.getRange('B19').setFormula("=View_Print!B21").setFontSize(10);
-  sheet.getRange('B20').setFormula("=View_Print!B22").setFontSize(10);
-  sheet.getRange('B21').setFormula("=View_Print!B23").setFontSize(10);
-  sheet.getRange('B22').setFormula("=View_Print!B24").setFontSize(10);
-  sheet.getRange('B23').setFormula("=View_Print!B25").setFontSize(10);
-  sheet.getRange('B24').setFormula("=View_Print!B26").setFontSize(10);
-  sheet.getRange('B25').setFormula("=View_Print!B27").setFontSize(10);
-  sheet.getRange('B26').setFormula("=View_Print!B28").setFontSize(10);
-  sheet.getRange('B27').setFormula("=View_Print!B29").setFontSize(10);
-  sheet.getRange('B28').setFormula("=View_Print!B30").setFontSize(10);
-
-  sheet.getRange('C19').setFormula("=View_Print!C21").setFontSize(10);
-  sheet.getRange('C20').setFormula("=View_Print!C22").setFontSize(10);
-  sheet.getRange('C21').setFormula("=View_Print!C23").setFontSize(10);
-  sheet.getRange('C22').setFormula("=View_Print!C24").setFontSize(10);
-  sheet.getRange('C23').setFormula("=View_Print!C25").setFontSize(10);
-  sheet.getRange('C24').setFormula("=View_Print!C26").setFontSize(10);
-  sheet.getRange('C25').setFormula("=View_Print!C27").setFontSize(10);
-  sheet.getRange('C26').setFormula("=View_Print!C28").setFontSize(10);
-  sheet.getRange('C27').setFormula("=View_Print!C29").setFontSize(10);
-  sheet.getRange('C28').setFormula("=View_Print!C30").setFontSize(10);
-
-  sheet.getRange('D19').setFormula("=View_Print!D21").setFontSize(10);
-  sheet.getRange('D20').setFormula("=View_Print!D22").setFontSize(10);
-  sheet.getRange('D21').setFormula("=View_Print!D23").setFontSize(10);
-  sheet.getRange('D22').setFormula("=View_Print!D24").setFontSize(10);
-  sheet.getRange('D23').setFormula("=View_Print!D25").setFontSize(10);
-  sheet.getRange('D24').setFormula("=View_Print!D26").setFontSize(10);
-  sheet.getRange('D25').setFormula("=View_Print!D27").setFontSize(10);
-  sheet.getRange('D26').setFormula("=View_Print!D28").setFontSize(10);
-  sheet.getRange('D27').setFormula("=View_Print!D29").setFontSize(10);
-  sheet.getRange('D28').setFormula("=View_Print!D30").setFontSize(10);
-  
-  
-  // Summary Section
-  sheet.getRange('C30').setValue('Subtotal:').setFontWeight('bold');
-  sheet.getRange('D30').setValue('=View_Print!D32');
-  
-  sheet.getRange('B31').setValue('Tax:').setFontWeight('bold');
-  sheet.getRange('C31').setValue('=View_Print!C33');
-  sheet.getRange('D31').setValue('=View_Print!D33');
-  
-  sheet.getRange('C32').setValue('Total:').setFontWeight('bold');
-  sheet.getRange('D32').setValue('=View_Print!D34');
-  
-  // Note Section
-  sheet.getRange('A29:E29').merge().setValue('Thank you for your business!').setFontWeight('bold');
-  
-   // Formatting the sheet
-  sheet.getRange('A1:E32').setHorizontalAlignment('center');
-  sheet.getRange('A1:E6').setHorizontalAlignment('left');
-  sheet.getRange('A9:B17').setHorizontalAlignment('left');
-  sheet.getRange('A34:E35').setHorizontalAlignment('left');
-  sheet.setColumnWidth(1, 350); // Set column A to 350
-  sheet.setColumnWidths(2, 3, 100); // Set columns B, C, D to 100
-  
-  // Setting borders for the table
-  sheet.getRange('A18:D28').setBorder(true, true, true, true, true, true);
-  
-  // Setting number formats
-  sheet.getRange('C19:C28').setNumberFormat('$#,##0.00');
-  sheet.getRange('D193:D28').setNumberFormat('$#,##0.00');
-  sheet.getRange('D30:D32').setNumberFormat('$#,##0.00');
+} catch (e) {
+  SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
 }
 
-function newfile() {
+
+  copyInput1it()
+  viewit()
+
+  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Please support DataMateApps and help us grow!");
+  } catch (e) {
+    SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
+  }
+}
+
+
+function newfileit() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
   const sheetNames = [
@@ -517,7 +506,7 @@ viewPrintSheet.setHiddenGridlines(true);
   viewPrintSheet.getActiveRangeList().setBackground("#d9ead3");
 
   logSheet.getRange("A2").activate();
-  logSheet.getCurrentCell().setValue("Anything Log");
+  logSheet.getCurrentCell().setValue("Orders Log");
   logSheet
     .getActiveRangeList()
     .setFontSize(11)
@@ -619,23 +608,9 @@ viewPrintSheet.setHiddenGridlines(true);
   dataSheet.getRange("AG1").activate();
   dataSheet.getRange("AG1").setFormula("=Input!O1");
 
-  copyInput1();
-  view();
-
-  // Ensure pending operations are processed before sending email
-SpreadsheetApp.flush();
-
-// Email Notification
-const recipient = "projectprodigyapp@gmail.com";
-const subject = "New Online Store Created!";
-const body = `A new Online Store has been created successfully in Google Sheets.\n\n
-Another user from Opensource.`;
-
-MailApp.sendEmail(recipient, subject, body);
-
 }
 
-function copyInput1() {
+function copyInput1it() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sourceSheet = ss.getSheetByName("Sheet1");
   var targetSheet = ss.getSheetByName("Input");
@@ -663,14 +638,9 @@ function copyInput1() {
   for (var j = 1; j <= columnsToCopy; j++) {
     targetSheet.setColumnWidth(j, sourceColWidths[j - 1]);
   }
-  
-  // Select cell C4 in the target sheet
-  targetSheet.activate();
-  targetSheet.getRange("C4").activate();
-
 }
 
-function copyInput2() {
+function copyInput2it() {
 var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sourceSheet = ss.getSheetByName("Sheet1");
   var targetSheet = ss.getSheetByName("View_Print");
@@ -698,16 +668,11 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
   for (var j = 1; j <= columnsToCopy; j++) {
     targetSheet.setColumnWidth(j, sourceColWidths[j - 1]);
   }
-  
-  // Select cell C4 in the target sheet
-  targetSheet.activate();
-  targetSheet.getRange("A1").activate();
-
  }
 
-function view() {
+function viewit() {
   
-  copyInput2(); 
+  copyInput2it(); 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const wsViewPrint = ss.getSheetByName("View_Print");
   const wsUpdate = ss.getSheetByName("Update");
@@ -730,7 +695,7 @@ function view() {
 
 }
 
-function contacts() {
+function contactsit() {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheetNames = ["contacts", "Address", "NewContact"];
@@ -878,15 +843,11 @@ function contacts() {
 
     // Hide gridlines in all sheets
     sheets.forEach(sheet => sheet.setHiddenGridlines(true));
-
-  wsSheet1.getRange("A1").activate();
-
-  SpreadsheetApp.getUi().alert("Online Store Template created successfully. Please support DataMateApps and help us grow!");
-  } catch (e) {
-    SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
+  } catch (error) {
+    Logger.log("Error in contactsit: " + error.message);
+    SpreadsheetApp.getUi().alert("An error occurred: " + error.message);
   }
 }
-
 
 
 function doGet() {
