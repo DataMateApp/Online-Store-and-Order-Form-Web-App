@@ -45,19 +45,6 @@ function createInvoiceTemplate() {
   sheet.getRange('C18').setValue('Unit Price').setFontWeight('bold').setBackground('#cccccc');
   sheet.getRange('D18').setValue('Total').setFontWeight('bold').setBackground('#cccccc');
 
-  var inventorySheet = ss.getSheetByName("Inventory"); 
-  if (inventorySheet) { // Ensure the sheet exists before using it
-    sheet.getRange("A19:A28").setDataValidation(
-      SpreadsheetApp.newDataValidation()
-        .setAllowInvalid(false)
-        .requireValueInRange(inventorySheet.getRange("A:A"), true) // Removed "$" for Apps Script compatibility
-        .build()
-    );
-  } else {
-    
-    Logger.log("Error: 'Inventory' sheet not found.");
-  }
-
   // Populate formulas for items in the invoice
   for (var row = 19; row <= 28; row++) {
     sheet.getRange('C' + row).setFormula(`=IFERROR(VLOOKUP(A${row},Inventory!$A$2:$CL$9341,3,FALSE), 0)`).setFontSize(10);
