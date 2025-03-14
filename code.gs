@@ -334,7 +334,31 @@ try {
     SpreadsheetApp.getUi().alert("Sheet1 not found.");
   }
 
-  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Please support DataMateApps and help us grow!");
+  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Deployment instructions:
+
+Step 1: Open the Apps Script Editor
+Open the Google Sheet that the script is bound to.
+Click Extensions > Apps Script to open the script editor.
+
+Click File > Save.
+
+Step 2: Deploy as a Web App
+Click Deploy > New Deployment.
+Under Select type, choose Web app.
+In the Description field, enter something like "Order Form Deployment".
+Under Execute as, select Me (so the script runs with your permissions).
+Under Who has access, select:
+Anyone (if you want anyone to access it without signing in).
+Click Deploy.
+Click Authorize Access and follow the prompts to approve permissions.
+Copy the Web App URL and share it with users.
+
+Step 4: Test the Web App
+Open the Web App URL in a browser.
+Fill out the form and submit it.
+Check:
+The Google Sheet to see if the data was recorded.
+Your email inbox for a notification. Please support DataMateApps and help us grow!");
 
 } catch (e) {
   SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
