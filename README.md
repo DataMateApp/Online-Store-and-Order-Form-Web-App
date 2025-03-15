@@ -66,7 +66,9 @@ This web app demonstrates how **DataMate** can be used for **front-end developme
 ### Step 2: Set Up Your Email  
 In the script editor, locate line **14**:
 1. var recipient = "your-email@example.com";
+
 Replace "your-email@example.com" with your actual email address.
+
 Example:
 var recipient = "john.doe@gmail.com";
 
