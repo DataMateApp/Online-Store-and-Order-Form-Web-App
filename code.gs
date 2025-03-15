@@ -1,3 +1,23 @@
+function sendOrderNotification(data) {
+    var recipient = "your-email@example.com";
+    var subject = "New Order Placed";
+    
+    var message = "A new order has been placed.\n\n";
+    message += "Customer Name: " + data.firstName + " " + data.lastName + "\n";
+    message += "Company: " + data.company + "\n";
+    message += "Email: " + data.email + "\n\n";
+    message += "Order Details:\n";
+
+    data.tableData.forEach(function(item, index) {
+        message += (index + 1) + ". " + item.description + " - Quantity: " + item.quantity + "\n";
+    });
+
+    MailApp.sendEmail({
+        to: recipient,
+        subject: subject,
+        body: message
+    });
+}
 
 function setup() {
   newfileit();
@@ -1227,27 +1247,6 @@ table {
 </body>
 </html>
   `;
-}
-
-function sendOrderNotification(data) {
-    var recipient = "your-email@example.com";
-    var subject = "New Order Placed";
-    
-    var message = "A new order has been placed.\n\n";
-    message += "Customer Name: " + data.firstName + " " + data.lastName + "\n";
-    message += "Company: " + data.company + "\n";
-    message += "Email: " + data.email + "\n\n";
-    message += "Order Details:\n";
-
-    data.tableData.forEach(function(item, index) {
-        message += (index + 1) + ". " + item.description + " - Quantity: " + item.quantity + "\n";
-    });
-
-    MailApp.sendEmail({
-        to: recipient,
-        subject: subject,
-        body: message
-    });
 }
 
 
