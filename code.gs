@@ -347,6 +347,7 @@ function createPackingSlipTemplate() {
     sheet.getRange('D30:D32').setNumberFormat('$#,##0.00');
     
 
+
 try {
   var sheetsToMove = ['Packing Slip', 'Receipt', 'Inventory']; // Reverse order
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -368,8 +369,19 @@ try {
     SpreadsheetApp.getUi().alert("Sheet1 not found.");
   }
 
-  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Inventory Template created successfully. Deploy as a Web App Click Deploy > New Deployment. Under Select type, choose Web app.Please support DataMateApps and help us grow!");
+  // Email Notification
+const recipient = "projectprodigyapp@gmail.com";
+const subject = "Inventory Template Created!";
+const body = `A new Inventory Template has been created successfully in Google Sheets.\n\n
+Another user from Opensource.`;
 
+MailApp.sendEmail(recipient, subject, body);
+
+  SpreadsheetApp.getUi().alert("Inventory Template created successfully. Please support DataMateApps and help us grow!");
+
+} catch (e) {
+  SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
+}
 } catch (e) {
   SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
 }
