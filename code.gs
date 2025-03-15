@@ -347,7 +347,6 @@ function createPackingSlipTemplate() {
     sheet.getRange('D30:D32').setNumberFormat('$#,##0.00');
     
 
-
 try {
   var sheetsToMove = ['Packing Slip', 'Receipt', 'Inventory']; // Reverse order
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -379,9 +378,6 @@ MailApp.sendEmail(recipient, subject, body);
 
   SpreadsheetApp.getUi().alert("Inventory Template created successfully. Please support DataMateApps and help us grow!");
 
-} catch (e) {
-  SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
-}
 } catch (e) {
   SpreadsheetApp.getUi().alert(`Error: ${e.message}`);
 }
