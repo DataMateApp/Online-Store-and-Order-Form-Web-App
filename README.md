@@ -59,18 +59,20 @@ This web app demonstrates how **DataMate** can be used for **front-end developme
 2. Click **Extensions > Apps Script**.  
 3. Delete the default code in `Code.gs`.  
 4. Copy & paste the provided `Code.gs`.  
-5. Save the project.  
 
 ---
 
 ### Step 2: Set Up Your Email  
-In the script editor, locate line **14**:
-1. var recipient = "your-email@example.com";
+1. In the script editor, locate line **14**:
+   
+var recipient = "your-email@example.com";
 
 Replace "your-email@example.com" with your actual email address.
 
 Example:
 var recipient = "john.doe@gmail.com";
+
+2. Save the project.
 
 ---
 
@@ -78,7 +80,7 @@ var recipient = "john.doe@gmail.com";
 1. In **Google Sheets**, go to the **DataMate UI**.  
 2. Click **Run > onInstall**.  
 3. **Authorize the script** when prompted.  
-4. Select **Setup** from the **DataMate UI menu** to create the required sheets.  
+4. Select **Setup** from the **Online Store & Order Form Web App UI menu** to create the required sheets.  
 
 ---
 
