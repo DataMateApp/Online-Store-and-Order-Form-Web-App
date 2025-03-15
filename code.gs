@@ -276,7 +276,7 @@ function createPackingSlipTemplate() {
     sheet.getRange('A10:B10').merge().setValue('Ship To:').setFontWeight('bold');
     sheet.getRange('A11:B11').merge().setFormula("=View_Print!A13");
     sheet.getRange('A12:B12').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 44, FALSE)");
-    sheet.getRange('A13:B13').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 63, FALSE");
+    sheet.getRange('A13:B13').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 63, FALSE)");
     sheet.getRange('A14:B14').merge().setFormula(
       '=VLOOKUP(A11, contacts!A:CJ, 67, FALSE) & ", " & ' +
       'VLOOKUP(A11, contacts!A:CJ, 68, FALSE) & "   " & ' +
