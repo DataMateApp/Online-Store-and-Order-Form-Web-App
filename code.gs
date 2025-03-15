@@ -76,7 +76,7 @@ function createInvoiceTemplate() {
   sheet.getRange('D30').setFormula('=SUM(D19:D28)');
   
   sheet.getRange('B31').setValue('Tax:').setFontWeight('bold');
-  sheet.getRange('C31').setValue('10');
+  sheet.getRange('C31').setValue('.07');
   sheet.getRange('D31').setFormula('=D30*C31');
   
   sheet.getRange('C32').setValue('Total:').setFontWeight('bold');
@@ -240,6 +240,8 @@ function createInventoryTemplate() {
   sheet.getRange('D1').setValue('Category').setFontWeight('bold');
   sheet.getRange('E1').setValue('Supplier').setFontWeight('bold');
   sheet.getRange('F1').setValue('Image').setFontWeight('bold');
+  sheet.getRange('J1').setValue('Payment Link').setFontWeight('bold');
+  sheet.getRange('F1').setValue('https://datamateapp.github.io/Donate%205%20per%20mo.html').setFontWeight('bold');
 
   // Set column widths for better readability
   sheet.setColumnWidths(1, 5, 150);
