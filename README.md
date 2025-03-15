@@ -1,94 +1,127 @@
-# Online-Store-and-Order-Form-Web-App Code for Google Sheets  
+# Online Store & Order Form Web App for Google Sheets  
 **Transform your spreadsheets into powerful data management tools.**  
 
+---
+
 ## About DataMateApps  
-Hi, I'm **Dan Northway**—Founder and Developer of DataMateApps. Before retiring, I spent my career as a **Construction Project Manager and Superintendent**.  
+Hi, I'm **Dan Northway**—Founder and Developer of **DataMateApps**.  
 
-At most companies I worked with, spreadsheets were the backbone of project management. Everything—timecards, pay applications, logs—was stored in countless Excel and PDF files, requiring manual tracking.  
+Before retiring, I spent my career as a **Construction Project Manager and Superintendent**, where spreadsheets were essential for managing everything from **timecards to pay applications**. However, **manual data logging** across countless Excel and PDF files was inefficient and prone to errors.  
 
-I knew databases could streamline this process, but Excel was the standard. That’s when I had an idea:  
-> *What if I could turn Excel itself into a lightweight database?*  
+I knew databases could streamline this process, but **Excel was the industry standard**. That’s when I asked myself:  
+> *What if I could turn Excel into a lightweight database?*  
 
-Using **forms and VBA**, I built a system that stored, logged, and organized data efficiently—making sorting and filtering a breeze. It became an essential tool in my workflow.  
-
-### The Birth of DataMate  
-After retiring, I revisited the concept, and a lightbulb went off:  
-> *Why not make this work with any form?*  
-
-With help from the recently released **ChatGPT**, **DataMate was born!**  
-
-DataMate isn’t a replacement for **full-scale databases like SQL** or enterprise-level solutions. Instead, it’s designed for **small businesses and teams** that rely on spreadsheets but need a **smarter, structured way to manage data**.  
-
-It bridges the gap between **manual spreadsheets** and **complex (often expensive) systems** that may be overkill for smaller operations.  
-
-### Why are DataMateApps Free?  
-Because **the idea matters more than the programming.**  
-
-Technology has made development more accessible, and for me, this is both a **passion project** and a way to **keep my mind sharp**. More importantly, I see DataMate as a **legacy—one that grows and evolves with every user.**  
+Using **forms and VBA**, I built a system that **stored, logged, and organized data**, allowing for easy sorting and filtering. It became a critical tool in my workflow.  
 
 ---
-This web app is an example to how the DataMate concept can be used for front end development. This web app is a customizable online store and order form linked to Google Sheets™, pulling inventory dynamically. It displays items with images, calculates totals, and processes orders with email notifications. It also generates invoices, receipts, and packing slips. The included App Script is editable.
-### Installation and Deployment  
+
+## The Birth of DataMate  
+After retiring, I revisited the concept and had a lightbulb moment:  
+> *Why not create a system that works with any form?*  
+
+With the help of **ChatGPT**, **DataMate was born!**  
+
+### What is DataMate?  
+DataMate isn’t a replacement for **full-scale databases like SQL** or **enterprise-level solutions**. Instead, it's designed for **small businesses and teams** already using spreadsheets but needing a **smarter, structured way to manage data**.  
+
+It **bridges the gap between manual spreadsheets and more complex (often expensive) systems**, which are often overkill for smaller operations.  
+
+---
+
+## Why is DataMate Free?  
+Because **the idea matters more than the programming.**  
+
+For me, DataMate is both a **passion project** and a way to **keep my mind sharp** in retirement. But more importantly, I see it as a **legacy—one that evolves with every user.**  
+
+However, to keep this project alive and growing for future generations, **community support is essential**.  
+
+[ Support DataMateApps for $5/month](https://datamateapp.github.io/Donate%205%20per%20mo.html)  
+
+---
+
+## About This Web App  
+This web app demonstrates how **DataMate** can be used for **front-end development**.  
+
+### Features  
+-  Dynamically pulls inventory from **Google Sheets™**  
+-  Displays items with **images**  
+-  Calculates **order totals**  
+-  Sends **email notifications**  
+-  Generates **invoices, receipts, and packing slips**  
+-  Fully editable **Google Apps Script**  
+
+---
+
+## Installation & Deployment  
 
 ### Step 1: Open Google Apps Script  
 1. Open **Google Drive** and create a **new spreadsheet**.  
 2. Click **Extensions > Apps Script**.  
-3. Delete any default code in `Code.gs`.  
+3. Delete the default code in `Code.gs`.  
 4. Copy & paste the provided `Code.gs`.  
-5. Click **Save project to Drive**
-
-### Step 2: Insert email Address
-1. In the script editor, locate the section of the script where the email is defined.
-Scroll down to line 14:
-var recipient = "your-email@example.com";
-Replace "your-email@example.com" with your actual email address.
-Example:
-var recipient = "john.doe@gmail.com"
-
-### Step 3: Install the Inventory Template  
-1. Click **Run > onInstall**.  
-2. Authorize the script when prompted.
-3. Open the DataMate UI and select **Setup**
-
-### Step 4: Deploy as a Web App
-Click Deploy > New Deployment.
-Under Select type, choose Web app.
-In the Description field, enter something like "Order Form Deployment".
-Under Execute as, select Me (so the script runs with your permissions).
-Under Who has access, select:
-Anyone (if you want anyone to access it without signing in).
-Click Deploy.
-Click Authorize Access and follow the prompts to approve permissions.
-Copy the Web App URL and share it with users.
-
-### Step 5: Test the Web App
-Open the Web App URL in a browser.
-Fill out the form and submit it.
-Check:
-The Google Sheet to see if the data was recorded.
-Your email inbox for a notification.   
+5. Save the project.  
 
 ---
 
-- **Collaboration is welcome!** – Need collaborators to develop new templates and features. 
+### Step 2: Set Up Your Email  
+In the script editor, locate line **14**:  
 
-Have feature requests? [Email me!](mailto:datamateapp@gmail.com)  
-Visit the website? [Website](https://datamateapp.github.io/)
+---
+
+### Step 3: Install the Inventory Template  
+1. In **Google Sheets**, go to the **DataMate UI**.  
+2. Click **Run > onInstall**.  
+3. **Authorize the script** when prompted.  
+4. Select **Setup** from the **DataMate UI menu** to create the required sheets.  
+
+---
+
+### Step 4: Deploy as a Web App  
+1. Click **Deploy > New Deployment**.  
+2. Under **Select type**, choose **Web app**.  
+3. Add a description like *Order Form Deployment*.  
+4. Under **Execute as**, select **Me**.  
+5. Under **Who has access**, select **Anyone**.  
+6. Click **Deploy** and **Authorize Access** when prompted.  
+7. Copy the **Web App URL** and share it with users.  
+
+---
+
+### Step 5: Test the Web App  
+1. Open the **Web App URL** in your browser.  
+2. Fill out the form and submit an order.  
+3. Check the **Google Sheet** for recorded data.  
+4. Verify that you received an **email notification**.  
+
+---
+
+### Step 7: Customize the App  
+- Edit the **Google Apps Script** to modify functionality.  
+- Change the **HTML and CSS** for UI customization.  
+- Add additional **Google Sheets functions** for advanced reporting.  
 
 ---
 
 ## 💙 Support This Project  
+If you find **DataMate** valuable, consider supporting future development:  
 
-DataMate is free, but if you find it useful, consider supporting development:  
+[Support DataMateApps](https://datamateapp.github.io/Donate%205%20per%20mo.html)  
 
-[**Support DataMateApps**](https://datamateapp.github.io/Donate%205%20per%20mo.html)  
+---
 
-Every donation helps keep this project alive and evolving!  
+## Collaboration & Contributions  
+Looking for **developers, testers, and collaborators** to help create **new templates and features**.  
+
+Got feature requests? [Email me!](mailto:datamateapp@gmail.com)  
+Visit the website: [DataMateApps Website](https://datamateapp.github.io/)  
 
 ---
 
 ## License  
 This project is licensed under the **MIT License**. See `LICENSE.txt` for details.  
 
+---
+
 ## Credits  
 Developed by **Dan Northway**.  
+
