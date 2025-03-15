@@ -1,3 +1,15 @@
+function onInstall() {
+  onOpen();
+}
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  var menu = ui.createMenu("Online Store and Order Form Web App")
+    .addItem("Setup", "setup");
+    
+    
+  menu.addToUi();
+}
+
 function sendOrderNotification(data) {
     var recipient = "your-email@example.com";
     var subject = "New Order Placed";
