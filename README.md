@@ -77,10 +77,9 @@ var recipient = "john.doe@gmail.com";
 ---
 
 ### Step 3: Install the Inventory Template  
-1. In **Google Sheets**, go to the **DataMate UI**.  
-2. Click **Run > onInstall**.  
-3. **Authorize the script** when prompted.  
-4. Select **Setup** from the **Online Store & Order Form Web App UI menu** to create the required sheets.  
+1. In the script editor Click **Run > onInstall**.  
+2. **Authorize the script** when prompted.  
+3. Select **Setup** from the **Online Store & Order Form Web App UI menu** to create the required sheets.  
 
 ---
 
