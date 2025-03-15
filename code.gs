@@ -253,7 +253,7 @@ function createInventoryTemplate() {
   sheet.getRange('E1').setValue('Supplier').setFontWeight('bold');
   sheet.getRange('F1').setValue('Image').setFontWeight('bold');
   sheet.getRange('J1').setValue('Payment Link').setFontWeight('bold');
-  sheet.getRange('F1').setValue('https://datamateapp.github.io/Donate%205%20per%20mo.html').setFontWeight('bold');
+  sheet.getRange('K1').setValue('https://datamateapp.github.io/Donate%205%20per%20mo.html').setFontWeight('bold');
 
   // Set column widths for better readability
   sheet.setColumnWidths(1, 5, 150);
