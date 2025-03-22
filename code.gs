@@ -131,6 +131,7 @@ function createReceiptTemplate() {
   sheet.getRange('A4:E4').merge().setFormula("=View_Print!A5").setFontSize(10);
   sheet.getRange('A5:E5').merge().setFormula("=View_Print!A6").setFontSize(10);
   sheet.getRange('A6:E6').merge().setFormula("=View_Print!A7").setFontSize(10);
+  sheet.getRange('A8:E8').merge().setValue('RECEIPT').setFontSize(14).setFontWeight('bold');
 
   
   // Client Information
