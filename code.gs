@@ -66,7 +66,7 @@ function createInvoiceTemplate() {
     'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
   );
   sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
-  sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 40, FALSE)");
+  sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A11, contacts!A:CJ, 20, FALSE)");
 
   sheet.getRange('D10:E10').merge().setValue('Date:').setFontWeight('bold');
   sheet.getRange('D11:E11').merge().setFormula("=TODAY()");
@@ -145,7 +145,7 @@ function createReceiptTemplate() {
   'VLOOKUP(A11, contacts!A:CJ, 32, FALSE)'
 );
   sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
-  sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 40, FALSE)");
+  sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 20, FALSE)");
 
    
   sheet.getRange('D10:E10').merge().setValue('Date Shipped:').setFontWeight('bold');
@@ -298,7 +298,7 @@ function createPackingSlipTemplate() {
       'VLOOKUP(A11, contacts!A:CJ, 69, FALSE)'
     );
     sheet.getRange('A15:B15').merge().setFormula("=HYPERLINK(VLOOKUP(A11, contacts!A:CJ, 16, FALSE))");
-    sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 40, FALSE)");
+    sheet.getRange('A16:B16').merge().setFormula("=VLOOKUP(A13, contacts!A:CJ, 20, FALSE)");
 
     sheet.getRange('D10:E10').merge().setValue('Date Shipped:').setFontWeight('bold');
     sheet.getRange('D11:E11').merge().setFormula("=View_Print!O2");
