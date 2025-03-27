@@ -1410,7 +1410,7 @@ function submitOrder(data) {
   
 
   // Call the NewContact function
-  NewContact();
+  newContactit();
 
 inputSheet.getRange("A13").setFormula(
       '=contacts!A2');
@@ -1428,7 +1428,7 @@ inputSheet.getRange("B11").setFormula(
 
 
 
-function NewContact() {
+function newContactit() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const newContact = ss.getSheetByName("NewContact");
   const contactsSheet = ss.getSheetByName("contacts");
