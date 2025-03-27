@@ -1410,11 +1410,13 @@ function submitOrder(data) {
   
 
   // Call the NewContact function
-  NewContact();
+NewContact();
 
-inputSheet.getRange("A13").setFormula(
-      '=contacts!A2');
+Utilities.sleep(2000);
+
+inputSheet.getRange("A13").setFormula('=contacts!A2');
 save();
+
 SpreadsheetApp.flush();
 updateInventory();
 copyInput1();
