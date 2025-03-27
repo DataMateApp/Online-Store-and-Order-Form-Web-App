@@ -1410,13 +1410,11 @@ function submitOrder(data) {
   
 
   // Call the NewContact function
-NewContact();
+  NewContact();
 
-Utilities.sleep(2000);
-
-inputSheet.getRange("A13").setFormula('=contacts!A2');
+inputSheet.getRange("A13").setFormula(
+      '=contacts!A2');
 save();
-
 SpreadsheetApp.flush();
 updateInventory();
 copyInput1();
@@ -1435,7 +1433,7 @@ function NewContact() {
   const newContact = ss.getSheetByName("NewContact");
   const contactsSheet = ss.getSheetByName("contacts");
 
- contactsSheet.insertRowBefore(2);;
+   contactsSheet.insertRowAfter(1);
 
 newContact.getRange('B1').copyTo(contactsSheet.getRange('contacts!B2'), { contentsOnly: true });
 newContact.getRange('B2').copyTo(contactsSheet.getRange('contacts!C2'), { contentsOnly: true });
