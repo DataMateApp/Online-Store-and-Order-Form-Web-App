@@ -1463,8 +1463,6 @@ contactsSheet.getCurrentCell().setFormula('=CONCATENATE(B2," ",C2," ",D2)');
 contactsSheet.getRange('A:A').activate();
 contactsSheet.getRange('A1').copyTo(contactsSheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
 
-contactsSheet.getRange('A1').activate();
-contactsSheet.getRange('A1').getFilter().sort(1, false);
 
 newContact.getRange('B1:B22').activate();
 newContact.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
