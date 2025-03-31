@@ -1433,7 +1433,7 @@ function newContactit() {
   const newContact = ss.getSheetByName("NewContact");
   const contactsSheet = ss.getSheetByName("contacts");
 
-   contactsSheet.insertRowAfter(1);
+   contactsSheet.insertRowBefore(2);
 
 newContact.getRange('B1').copyTo(contactsSheet.getRange('contacts!B2'), { contentsOnly: true });
 newContact.getRange('B2').copyTo(contactsSheet.getRange('contacts!C2'), { contentsOnly: true });
