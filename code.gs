@@ -779,7 +779,7 @@ function contactsit() {
     contactsSheet.getRange("BO1").setValue("Other City");
     contactsSheet.getRange("BP1").setValue("Other State");
     contactsSheet.getRange("BQ1").setValue("Other Postal Code");
-    contactsSheet.getRange("A1:CL2000").createFilter();
+    
 
     // Setup Address sheet
     addressSheet.activate();
